@@ -1,0 +1,6 @@
+Team: <Names and Kaggle handles>
+Affirmation:
+- No human labeling or test-set leakage used.
+- All code dependencies and licenses listed in THIRD_PARTY_NOTICES.md.
+- No secrets included. .env.example provided.
+- Repository link (public copy posted to competition forum): <link>
