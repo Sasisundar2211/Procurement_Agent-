@@ -29,7 +29,7 @@ This checklist ensures compliance with Kaggle competition rules for the Procurem
 | Training commands documented | ✅ PASS | In MODEL_REPRODUCIBILITY.md |
 | Inference commands documented | ✅ PASS | In MODEL_REPRODUCIBILITY.md |
 | Hardware requirements documented | ✅ PASS | In MODEL_REPRODUCIBILITY.md |
-| Runtime estimates | ⚠️ TODO | Update with actual runtime measurements |
+| Runtime estimates | ⚠️ AUTHOR INPUT NEEDED | Measure actual runtime and update MODEL_REPRODUCIBILITY.md |
 | Random seeds documented | ✅ PASS | Default seed=42 in train.py |
 
 ## Hyperparameters and Reproducibility
@@ -42,7 +42,7 @@ This checklist ensures compliance with Kaggle competition rules for the Procurem
 | Learning rate | ✅ PASS | Default 0.001, configurable via CLI |
 | Number of epochs | ✅ PASS | Default 10, configurable via CLI |
 | Random seed | ✅ PASS | Default 42, configurable via CLI |
-| Exact compute hours | ⚠️ TODO | Author to fill in actual compute time |
+| Exact compute hours | ⚠️ AUTHOR INPUT NEEDED | Run full training and document actual time |
 
 ## External Data and Models
 

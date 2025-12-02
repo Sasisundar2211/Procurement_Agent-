@@ -85,10 +85,11 @@ def run_all():
 
 if __name__ == "__main__":
     import argparse
+    import glob
     parser = argparse.ArgumentParser(description="Run Procurement Agent System")
     parser.add_argument("--train", action="store_true", help="Run training before starting servers")
     parser.add_argument("--inference", action="store_true", help="Run inference before starting servers")
-    parser.add_argument("--model-path", type=str, default=None, help="Model path for inference")
+    parser.add_argument("--model-path", type=str, default=None, help="Model path for inference (auto-detected if not specified)")
     parser.add_argument("--servers-only", action="store_true", help="Only start backend/frontend servers")
     args = parser.parse_args()
     
@@ -104,12 +105,19 @@ if __name__ == "__main__":
         print("✅ Training completed")
     
     if args.inference:
-        if not args.model_path:
-            print("❌ --model-path required for inference")
-            sys.exit(1)
+        model_path = args.model_path
+        if not model_path:
+            # Auto-detect the most recent model
+            model_dirs = sorted(glob.glob("models/procurement_model_*"))
+            if model_dirs:
+                model_path = model_dirs[-1]
+                print(f"🔍 Auto-detected model: {model_path}")
+            else:
+                print("❌ No model found. Run with --train first or specify --model-path")
+                sys.exit(1)
         print("🔹 Running inference...")
         inference_result = subprocess.run(
-            [sys.executable, "inference.py", "--model-path", args.model_path, "--data-path", "data/public", "--print-samples"],
+            [sys.executable, "inference.py", "--model-path", model_path, "--data-path", "data/public", "--print-samples"],
             cwd=os.path.dirname(os.path.abspath(__file__))
         )
         if inference_result.returncode != 0:

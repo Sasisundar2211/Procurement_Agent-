@@ -24,8 +24,10 @@ secrets/
 # Submission artifact
 submission/data/sf_data/
 
-# Model artifacts
-models/
+# Model artifacts (exclude generated models but keep README)
+models/*
+!models/README.md
 
-# Inference outputs
-outputs/
+# Inference outputs (exclude generated outputs but keep README)
+outputs/*
+!outputs/README.md
