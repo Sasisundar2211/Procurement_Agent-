@@ -55,8 +55,22 @@ def detect_public_only(drift_threshold: float | None = None):
     
     drifts = contracted_pos[contracted_pos['price_drift'] > drift_threshold].copy()
     
-    # Add Gemini summary
-    drifts['gemini_summary'] = drifts.apply(lambda row: summarize_drift_with_gemini(row['contract_unit_price'], row['unit_price']), axis=1)
+    # Add Gemini summary - OPTIMIZED: Only summarize top 5 to prevent timeout
+    drifts.sort_values('price_drift', ascending=False, inplace=True)
+    
+    # Initialize with None
+    drifts['gemini_summary'] = None
+    
+    # Take top 5 for AI summary
+    top_5_indices = drifts.index[:5]
+    
+    # Apply Gemini only to top 5
+    for idx in top_5_indices:
+        row = drifts.loc[idx]
+        drifts.at[idx, 'gemini_summary'] = summarize_drift_with_gemini(row['contract_unit_price'], row['unit_price'])
+        
+    # Fill the rest with a static message
+    drifts['gemini_summary'] = drifts['gemini_summary'].fillna("Drift detected (AI summary skipped for speed)")
 
     # Rename columns to match frontend expectation
     drifts.rename(columns={

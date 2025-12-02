@@ -69,11 +69,16 @@ export default function Dashboard() {
   const calculateStats = (data: DetectionResult[]) => {
     const total = data.length;
     const alerts = data.length;
-    // Calculate average drift if available, else mock
-    // price_drift is a ratio (e.g. 1.20), we want percentage (20)
-    const avg = data.length > 0 
-      ? data.reduce((acc, curr) => acc + ((curr.price_drift || 1) - 1) * 100, 0) / data.length 
-      : 15.5;
+    
+    // Calculate MEDIAN drift to avoid outliers (like 400,000%) skewing the average
+    let avg = 0;
+    if (data.length > 0) {
+      const drifts = data.map(d => ((d.price_drift || 1) - 1) * 100).sort((a, b) => a - b);
+      const mid = Math.floor(drifts.length / 2);
+      avg = drifts.length % 2 !== 0 ? drifts[mid] : (drifts[mid - 1] + drifts[mid]) / 2;
+    } else {
+      avg = 0;
+    }
 
     setStats({
       totalDetections: total,
