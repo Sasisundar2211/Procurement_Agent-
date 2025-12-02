@@ -8,7 +8,7 @@ def run():
     db_url = os.getenv("DATABASE_URL", "sqlite:///data/procure.db")
     engine = create_engine(db_url)
     
-    public_data_dir = "data/public"
+    public_data_dir = "data"
     
     try:
         contracts_df = pd.read_csv(f"{public_data_dir}/contracts.csv")

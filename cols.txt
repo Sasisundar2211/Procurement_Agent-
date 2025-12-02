@@ -1,0 +1,22 @@
+Fiscal Year
+Purchase Order Date
+Purchase Order
+Purchase Order Line
+Contract Number
+Contract Title
+Purchasing Department
+Purchasing Department Title
+Post Date - Original
+Post Date - Current
+Commodity Code
+Commodity Title
+Supplier & Other Non-Supplier Payees
+Supplier Street
+Supplier City
+Supplier State
+Supplier ZIP Code
+Supplier Contact
+Supplier Email
+Supplier Phone
+Encumbered Quantity
+Encumbered Amount

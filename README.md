@@ -1,52 +1,19 @@
-# Procurement Price-Drift Enforcement Agent
+# Procurement Agent with Gemini
 
-A tool to detect and enforce price-drift in procurement data.
+This project is a procurement agent that uses Gemini to detect price drifts in purchase orders.
 
-## How to run locally
+## Running with Docker
 
-1.  Generate data:
+1.  **Build the Docker image:**
+
     ```bash
-    python data_generator.py
-    ```
-    This generates data in `data/private` and `data/public`.
-
-2.  Ingest public data:
-    ```bash
-    python -c "from src.agents.ingestor import run; run()"
+    docker build -t procurement-agent .
     ```
 
-3.  Start the API:
+2.  **Run the Docker container:**
+
     ```bash
-    uvicorn src.api.fastapi_app:app --reload --port 8000
+    docker run -p 8000:8000 procurement-agent
     ```
 
-4.  Run detection via API:
-    ```bash
-    curl -X POST http://localhost:8000/run_detection
-    ```
-
-## LLM Usage
-
-This project can use a Large Language Model (LLM) for certain tasks. The `LLM_PROVIDER` environment variable controls which provider to use.
-
--   `LLM_PROVIDER=local`: (Default) Uses a simple, deterministic local fallback that does not make network requests.
--   `LLM_PROVIDER=openai`: Uses the OpenAI API. Requires an `LLM_API_KEY`.
-
-## Compliance
-
--   For compliance details, see `compliance.md`.
--   For third-party licenses, see `THIRD_PARTY_NOTICES.md`.
--   A template for submission is in `submission_compliance.txt`.
-
-## How to create submission artifact
-
-To create a submission artifact that excludes private data, run the following command:
-
-```bash
-python scripts/make_submission_artifact.py
-```
-
-## Team Eligibility
-
--   **Team Members:** `<Your Name(s) / Handle(s)>`
--   Please confirm that all team members meet the competition's residency and export control rules.
+Open your browser and navigate to `http://localhost:8000` to use the application.
