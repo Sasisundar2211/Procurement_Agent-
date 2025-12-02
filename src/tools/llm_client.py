@@ -1,4 +1,9 @@
 # src/tools/llm_client.py
+from dotenv import load_dotenv
+import pathlib
+env_path = pathlib.Path(__file__).parent.parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
+
 import os
 import google.generativeai as genai
 
@@ -21,6 +26,8 @@ def summarize_drift_with_gemini(contract_price, po_price):
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return f"Error generating summary: {str(e)}"
 
 def draft_message(prompt):

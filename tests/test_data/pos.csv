@@ -1,6 +1,3 @@
-po_id,contract_id,unit_price
-1,1,110
-2,1,100
-3,2,205
-4,2,200
-5,3,300
+version https://git-lfs.github.com/spec/v1
+oid sha256:43c9ed4a8cbd132a3e595a28f34e22ce6bbef3a96a737de68c85ebb6bda17e82
+size 69
