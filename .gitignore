@@ -23,3 +23,9 @@ secrets/
 
 # Submission artifact
 submission/data/sf_data/
+
+# Model artifacts
+models/
+
+# Inference outputs
+outputs/
